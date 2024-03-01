@@ -1,0 +1,7 @@
+.venvtravel
+src/__pycache__
+src/airports.py
+src/config.py
+src/try.py
+src/partly_adapter.py
+
