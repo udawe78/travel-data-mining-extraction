@@ -274,47 +274,7 @@ def fixing_price_inner_json(id: int, price: int) -> None:
     with open(f'{INNER_JSON_DIR}/{id}.json', 'w') as file:
         json.dump(inner_json, file, indent=4)
         
-    
-def get_prompts_GPT(prompt_json):
-    with open(prompt_json, 'r') as file:
-        return json.load(file)
-    
-    
-
-def limit_calls_per_minute(max_calls):
-    """
-    Decorator that limits a function to being called `max_calls` times per minute,
-    with a delay between subsequent calls calculated based on the time since the
-    previous call.
-    """
-    calls = []
-    def decorator(func):
-        def wrapper(prompt, api_key='OPENAI_API_KEY_CT_0'):
-            # Remove any calls from the call history that are older than 1 minute
-            
-            calls[:] = [call for call in calls if call > time.time() - 60]
-            if len(calls) >= max_calls:
-                # Too many calls in the last minute, calculate delay before allowing additional calls
-                time_since_previous_call = time.time() - calls[-1]
-                delay_seconds = 60 / max_calls - time_since_previous_call
-                if delay_seconds > 0:
-                    time.sleep(delay_seconds)
-            # Call the function and add the current time to the call history
-            try:
-                result = func(prompt, api_key='OPENAI_API_KEY_CT_0')
-            except Exception:
-                # An exception was raised, trigger a delay and recursive function call with the same parameter
-                time.sleep(60)
-                return wrapper(prompt, api_key='OPENAI_API_KEY_CT_0')
-            
-            calls.append(time.time())
-            print('\n',result)
-            
-            return result
-        return wrapper
-    return decorator
-        
-    
+   
     
 if __name__ == '__main__':
     ...
