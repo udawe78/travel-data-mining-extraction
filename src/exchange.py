@@ -31,22 +31,6 @@ def update_exchange_rates() -> bool:
         print(err)
         logging.error(f'{datetime.today()} an exception occurred', exc_info=True)
         return False
-        
-
-
-def last_hrk_eur_rates():
-    
-    url = 'https://api.currencyapi.com/v3/historical'
-    pars = {'apikey': 'XdHFU6mfUp0T3E7EQe0SNtGTfdE0JLgaxz8FDrSf',
-            'base_currency': 'EUR',
-            'date': '2023-01-14',
-            'currencies': ('HRK')}
-    
-    r = requests.get(url, params=pars)
-    
-    CURRENCY_EXCHANGE_RATES_DIR.mkdir(parents=True, exist_ok=True)
-    with open(CURRENCY_EXCHANGE_RATES_DIR/'last_HRK_EUR_rates.json', mode='w') as f:
-        json.dump(r.json(), f)
 
     
 def get_exchange_rates() -> tuple:
@@ -72,7 +56,5 @@ def get_exchange_rates() -> tuple:
 
 
 if __name__ == '__main__':
-    update_exchange_rates()
-    #last_hrk_eur_rates()
-    
+    update_exchange_rates()    
     pass
