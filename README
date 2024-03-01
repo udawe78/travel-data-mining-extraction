@@ -1,4 +1,4 @@
-The whole process of data mining can be run via 'pipeline.py' and consists of the following steps:
+The entire data mining process can be run through the 'main.py' file and consists of the following steps:
     1) SCRAPING jsons from the site (scraping.py)
     2) EXTRACTION of all direct routes from the scraped jsons (extraction.py including preextraction.py)
     3) TREATMENT of obtained data to create the datasets for validation etc (treatment.py)
